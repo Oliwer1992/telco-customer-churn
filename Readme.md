@@ -1,11 +1,11 @@
 ## 📌 Project Overview
-This project focuses on predicting customer churn for a telecomunications company using machine learning classification models. The goal is to identyfi customers at risk of cancelling
-their service, enabling the business to take a proactive retenction actions.
-The projekt consists of two phases: **Exploratory Data Analysis (EDA)** to understand the data and uncover key churn patterns, and **Model Training** where three classification models were trained 
+This project focuses on predicting customer churn for a telecommunications company using machine learning classification models. The goal is to  identify customers at risk of cancelling
+their service, enabling the business to take a proactive  retention actions.
+The project consists of two phases: **Exploratory Data Analysis (EDA)** to understand the data and uncover key churn patterns, and **Model Training** where three classification models were trained 
 and compared: Logistic Regression, Random Forest, XGBoost - each evaluated on default settings and tuned using GridSearchCV with F1-score optimization.
 
 ## 📊 Dataset Information
-The data used in this project comes from Telco Customer Churn dataset avaible on Kaggle.
+The data used in this project comes from Telco Customer Churn dataset  available on Kaggle.
 * **Source:** https://www.kaggle.com/datasets/blastchar/telco-customer-churn
 * **Records:** 7043 customers
 * **Features:** 21 columns (20 features + 1 target variable)
@@ -26,13 +26,13 @@ The project is structured into 2 logical stages (Jupyter Notebooks).
 File: `01_Data_Cleaning_and_EDA.ipynb`
 * **Data Quality Check:** Design a custom class to identify missing values and duplicates. Handle missing values.
 * **Univariate Analysis:** Analysis data to better understand distribution.
-* **Bivariarate Analysis:** Relationships between features and churn target variable
+* **Bivariate  Analysis:** Relationships between features and churn target variable
 * **Correlation Analysis:** Investigating relationships between numerical features and churn to select independent variables for modeling
 
 ### 2️⃣ Phase 2: Classification Models Training
 File: `02_Classification_Models_Training.ipynb`
 * **Preprocessing:** Label encoding of categorical variables, train/test split with stratification.
-* **Logisitic Regression:** Baseline model + GridSearchCV tuning (F1 optimization)
+* **Logistic Regression:** Baseline model + GridSearchCV tuning (F1 optimization)
 * **Random Forest Classifier:** Baseline model + GridSearchCV tuning (F1 optimization)
 * **XBGClassifier:** Baseline model + GridSearchCV tuning (F1 optimization)
 * **Feature Importance:** Analysis of key churn predictors for each tuned model
