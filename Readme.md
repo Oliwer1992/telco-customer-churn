@@ -31,7 +31,7 @@ File: `01_Data_Cleaning_and_EDA.ipynb`
 
 ### 2️⃣ Phase 2: Classification Models Training
 File: `02_Classification_Models_Training.ipynb`
-* **Preprocessing:** Label encoding of categorical variables, train/test split with stratification.
+* **Preprocessing:** Label encoding of categorical variables, train/test split with stratification. Class imbalance (73/27) was addressed via StratifiedKFold cross-validation and class_weight='balanced' during GridSearchCV tuning.
 * **Logistic Regression:** Baseline model + GridSearchCV tuning (F1 optimization)
 * **Random Forest Classifier:** Baseline model + GridSearchCV tuning (F1 optimization)
 * **XBGClassifier:** Baseline model + GridSearchCV tuning (F1 optimization)
