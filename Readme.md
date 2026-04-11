@@ -31,7 +31,7 @@ File: `01_Data_Cleaning_and_EDA.ipynb`
 
 ### 2️⃣ Phase 2: Classification Models Training
 File: `02_Classification_Models_Training.ipynb`
-* **Preprocessing:** Label encoding of categorical variables, train/test split with stratification. Class imbalance (73/27) was addressed via StratifiedKFold cross-validation and class_weight='balanced' during GridSearchCV tuning.
+* **Preprocessing:** Applied a highly optimized hybrid encoding strategy: Label Encoding for binary features, manual numerical mapping for ordinal features (`Contract`), and One-Hot Encoding (`pd.get_dummies` with `drop_first=True`) for nominal features. Class imbalance (73/27) was addressed via StratifiedKFold cross-validation and `class_weight='balanced'` during GridSearchCV tuning.
 * **Logistic Regression:** Baseline model + GridSearchCV tuning (F1 optimization)
 * **Random Forest Classifier:** Baseline model + GridSearchCV tuning (F1 optimization)
 * **XBGClassifier:** Baseline model + GridSearchCV tuning (F1 optimization)
@@ -42,33 +42,32 @@ File: `02_Classification_Models_Training.ipynb`
 
 |Model|Precision|Recall|Specificity|Accuracy|F1|ROC-AUC|FN|
 |:-----|:------|:------|:--------|:-------|:------|:-----|:-----|
-|LR Default|67.23 %|55.08 %|90.34 %|80.98 %|60.59 %|-|168|
-|LR Tuned|54.12 %|82.26 %|74.69 %|76.79 %|65.40 %|85.43 %|65|
-|RF Default|66.91 %|48.66 %|91.30%|79.99%|56.35 %|-|192|
-|RF Tuned|58.91 %|75.13 %|81.06 %|79.49 %|66.04 %|85.57 %|93|
-|XGB Default|63.14 %|52.67 %|88.89 %|79.28 %|57.43 %|-|177|
-|XGB Tuned|54.58 %|81.28 %|75.56 %|77.08 %|65.31 %|86.27 %|70|
+|LR Default|66.23 %|54.54 %|89.95 %|80.55 %|59.82 %|-|170|
+|LR Tuned|54.20 %|81.02 %|75.27 %|76.79 %|64.95 %|85.47 %|71|
+|RF Default|68.91 %|49.19 %|91.98%|80.62%|57.41 %|-|190|
+|RF Tuned|55.70 %|78.32 %|77.49 %|77.15 %|65.11 %|86.25 %|81|
+|XGB Default|64.29 %|53.35 %|88.89 %|79.99 %|58.48 %|-|167|
+|XGB Tuned|54.41 %|80.75%|75.76 %|76.93 %|65.02 %|86.21 %|72|
 
 * 🏆**Best Model: Logistic Regression Tuned**
-* Highest Recall (82.26 %)
-* Lowest missed churners (FN = 65)
+* Highest Recall (81.02 %)
+* Lowest missed churners (FN = 71)
 * Comparable F1 and Precision to more complex models
 * Simple, interpretable and easy to deploy
 
-![ROC Curve](images/roc_curve.png)
+![ROC Curve](images/roc_curve_1.png)
 
-* All three tuned models achieve nearly identical ROC-AUC score (LR: 0.854, RF: 0.857, XGB: 0.863), indicating comparable discriminative ability. The final model selection was theraforce basen on Recall and FN - metrics that better reflect the business
+* All three tuned models achieve nearly identical ROC-AUC score (LR: 0.855, RF: 0.863, XGB: 0.862), indicating comparable discriminative ability. The final model selection was theraforce basen on Recall and FN - metrics that better reflect the business
 objective of minimizing missed churners.
 
 ## 🔍 Key Findings
-* **Contract type** is the strongest churn predictor across all models
-* Customers on **month-to-month contracts** have a ~ 43 % churn rate vs ~ 3 % for **two-years contracts**
-* **New customers** (0-2 months tenure) are the most likely to churn
-* Customers with **high monthly charges (70-100 USD)** are at significantly greater risk
-* Customers without **OnlineSecurity** or **TechSupport** are more prone to cancellation (XGBClassifier finding)
+* **Contract type** and **Tenure** are the strongest churn predictors across all tested algorithms.
 
+* Customers on **month-to-month** contracts are drastically more likely to leave compared to those on one- or two-year contracts.
 
+* **The "Fiber Optic" Risk:** Proper categorical encoding revealed that customers using the **Fiber optic** internet service are at a remarkably high risk of churning, suggesting potential issues with pricing competitiveness or service quality.
 
+* **Payment Methods Matter:** Customers using manual payment methods, specifically **Electronic check**, show a significantly higher churn rate compared to those using automated, frictionless methods (like credit cards).
 ## 🚀 How to Run (Local Setup)
 
 To reproduce the analysis on your local machine, follow these steps:
